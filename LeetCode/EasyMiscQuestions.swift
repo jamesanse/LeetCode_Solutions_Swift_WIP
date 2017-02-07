@@ -701,4 +701,63 @@ class RectangleIntersection {
     }
 }
 
+class BestTimeToBuySellStocks {
+    //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
+    func maxProfit(_ prices: [Int]) -> Int {
+        var res = 0
+        if prices.count == 0 || prices.count == 1 {
+           return 0
+        }
+        var index = 0
+        while index < prices.count - 1 {
+            res =  prices[index] < prices[index + 1] ? res + prices[index + 1] - prices[index] : res
+            index = index + 1
+        }
+        
+        return res
+    }
+    
+}
 
+class NextGreaterElement {
+    //https://leetcode.com/problems/next-greater-element-i/
+    func nextGreaterElement(_ findNums: [Int], _ nums: [Int]) -> [Int] {
+        var res = [Int]()
+        for number in findNums {
+           var index = nums.index(of: number)!
+           var nextGreaterNumber = -1
+           while index < nums.count - 1 {
+              index += 1
+              if nums[index] > number {
+                nextGreaterNumber = nums[index]
+                break
+              }
+           }
+           res.append(nextGreaterNumber)
+        }
+        return res
+    }
+    
+}
+
+class KeyboardRow {
+    //https://leetcode.com/problems/keyboard-row/
+    func findWords(_ words: [String]) -> [String] {
+        var res = [String]()
+        let map = ["q":1,"w":1,"e":1,"r":1,"t":1,"y":1,"u":1,"i":1,"o":1,"p":1,"a":2,"s":2,"d":2,"f":2,"g":2,"h":2,"j":2,"k":2,"l":2,"z":3,"x":3,"c":3,"v":3,"b":3,"n":3,"m":3]
+        for word in words {
+            let startingGroup = map[String(word.lowercased().characters.first!)]!
+            inner : for (index, char) in word.lowercased().characters.enumerated() {
+                if index != 0 {
+                    if map[String(char)]! != startingGroup {
+                       break inner
+                    }
+                }
+                if index == word.characters.count - 1 {
+                    res.append(word)
+                }
+            }
+        }
+        return res
+    }
+}
