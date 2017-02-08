@@ -761,3 +761,53 @@ class KeyboardRow {
         return res
     }
 }
+
+class RelativeRanks {
+    //https://leetcode.com/problems/relative-ranks/  
+    //beats 100% other swift solutions!
+    func findRelativeRanks(_ nums: [Int]) -> [String] {
+        var res = Array<String>(repeatElement(" ", count: nums.count))
+        var numsWithIndexes = [(Int,Int)]()
+        for (index,score) in nums.enumerated() {
+           numsWithIndexes.append((score,index))
+        }
+        numsWithIndexes = numsWithIndexes.sorted {
+          $0.0 > $1.0
+        }
+        for (index , num) in numsWithIndexes.enumerated() {
+            let title : String!
+            switch index {
+            case 0:
+                title = "Gold Medal"
+            case 1:
+                title = "Silver Medal"
+            case 2:
+                title = "Bronze Medal"
+            default:
+                title = "\(index + 1)"
+            }
+            res[num.1] = title
+        }
+        return res
+    }
+}
+
+class BuyAndSellStocks {
+    //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+    func maxProfit(_ prices: [Int]) -> Int {
+        var res = 0
+        var localMin = [Int:Int]()
+        var localMax = [Int:Int]()
+        for buyingIndex in 0..<prices.count - 1 {
+            let priceOfCurrentDay = prices[buyingIndex]
+            let priceOfNextDay =  buyingIndex == prices.count - 1 ? 0 : prices[buyingIndex] + 1
+            let priceOfPreviousDay = buyingIndex > 0 ? prices[buyingIndex - 1] : 0
+            if priceOfCurrentDay < priceOfPreviousDay && priceOfCurrentDay < priceOfNextDay {
+                localMin[priceOfCurrentDay] = buyingIndex
+            }
+            //needs more work
+        }
+        
+        return res
+    }
+}
