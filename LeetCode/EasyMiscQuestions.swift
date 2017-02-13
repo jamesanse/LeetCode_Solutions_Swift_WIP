@@ -795,19 +795,41 @@ class RelativeRanks {
 class BuyAndSellStocks {
     //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
     func maxProfit(_ prices: [Int]) -> Int {
-        var res = 0
-        var localMin = [Int:Int]()
-        var localMax = [Int:Int]()
-        for buyingIndex in 0..<prices.count - 1 {
-            let priceOfCurrentDay = prices[buyingIndex]
-            let priceOfNextDay =  buyingIndex == prices.count - 1 ? 0 : prices[buyingIndex] + 1
-            let priceOfPreviousDay = buyingIndex > 0 ? prices[buyingIndex - 1] : 0
-            if priceOfCurrentDay < priceOfPreviousDay && priceOfCurrentDay < priceOfNextDay {
-                localMin[priceOfCurrentDay] = buyingIndex
-            }
-            //needs more work
+        var maxProfit = 0
+        if prices.count == 0 {
+           return maxProfit
         }
-        
-        return res
+        var currentMin = Int.max
+        for price in prices {
+            if price < currentMin {
+                currentMin = price
+            } else if price - currentMin > maxProfit {
+                maxProfit = price - currentMin
+            }
+        }
+        return maxProfit
     }
 }
+
+class HappyNumber {
+    //https://leetcode.com/problems/happy-number/
+    func isHappy(_ n: Int) -> Bool {
+        if n == 0 {
+           return true
+        } else {
+            var x = n
+            var res = 0
+            while x >= 10 {
+               res = Int(pow(Float(x%10), 2)) + res
+               x = n/10
+            }
+            res = res + x
+            if res == x {
+                return true
+            } else {
+                return isHappy(res)
+            }
+        }
+    }
+}
+
