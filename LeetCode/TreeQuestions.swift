@@ -122,6 +122,59 @@ import Foundation
         }
     }
     
+    func levelOrderBottom(_ root: TreeNode?) -> [[Int]] {
+    //https://leetcode.com/problems/binary-tree-level-order-traversal-ii/?tab=Description
+    // beats 50%
+        //inner function to compute next level
+        func totalChildren(roots:[TreeNode]) -> Int {
+            var res = 0
+            for node in roots {
+                if let _ = node.left {
+                    res = res + 1
+                }
+                if let _ = node.right {
+                    res = res + 1
+                }
+            }
+            return res
+        }
+        
+        
+        var res = [[Int]]()
+        var Queue = [TreeNode]();
+        var levelCount = 1
+        var levelArray = [Int]()
+        var levelRootArray = [TreeNode]()
+        guard root != nil else {
+           return res
+        }
+        
+        
+        Queue.insert(root!, at: 0)
+        while !Queue.isEmpty {
+            let node = Queue.popLast()!
+            levelArray.append(node.val)
+            levelRootArray.append(node)
+            levelCount = levelCount - 1
+            if levelCount == 0 {
+              res.append(levelArray)
+              levelCount = totalChildren(roots: levelRootArray)
+              levelArray.removeAll()
+              levelRootArray.removeAll()
+            }
+            
+            if let left = node.left {
+               Queue.insert(left, at: 0)
+            }
+            if let right = node.right {
+               Queue.insert(right, at: 0)
+            }
+        }
+        
+        
+        return res.reversed()
+    }
+    
     
   }
 

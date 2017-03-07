@@ -814,22 +814,157 @@ class BuyAndSellStocks {
 class HappyNumber {
     //https://leetcode.com/problems/happy-number/
     func isHappy(_ n: Int) -> Bool {
-        if n == 0 {
+        if n == 1 {
            return true
         } else {
-            var x = n
-            var res = 0
-            while x >= 10 {
-               res = Int(pow(Float(x%10), 2)) + res
-               x = n/10
+            var results = Set<Int>()
+            results.insert(n)
+            var res = n
+            while res != 1  {
+                var temp = 0
+                while res >= 10 {
+                    temp = Int(pow(Float(res%10), 2)) + temp
+                    res = res/10
+                }
+                temp = temp + Int(pow(Float(res), 2))
+                res = temp
+                if results.contains(res) {
+                    return false
+                } else {
+                    results.insert(res)
+                }
             }
-            res = res + x
-            if res == x {
-                return true
-            } else {
-                return isHappy(res)
-            }
+            return true
         }
     }
 }
 
+class searchInsertPosition {
+    //https://leetcode.com/problems/search-insert-position/
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        if nums.count == 0 {
+          return 0
+        }
+        for (index, num) in nums.enumerated() {
+                if num >= target {
+                  return index
+                }
+        }
+        return nums.count
+    }
+}
+
+class MaximumSubarray {
+    //https://leetcode.com/problems/maximum-subarray/
+    func maxSubArray(_ nums: [Int]) -> Int {
+        
+        if nums.count == 0 {
+          return 0
+        }
+        var res = nums.max()!
+        var tempMax = 0
+        for num in nums {
+            tempMax = num + tempMax
+            if tempMax <= 0 {
+               tempMax = 0
+            } else if tempMax > res {
+               res = tempMax
+            }
+        }
+        return res
+    }
+}
+
+class climbStairs {
+   //https://leetcode.com/problems/climbing-stairs/
+    func climbStairs(_ n: Int) -> Int {
+        if n <= 2 {
+            return n
+        } else {
+            var fibSequence = [0,1,2]
+            var i = 3
+            while i <= n {
+                fibSequence.append(fibSequence[i - 1] + fibSequence[i - 2])
+                i = i + 1
+            }
+            return fibSequence.last!
+        }
+    }
+}
+
+class RepeatedSubStringPattern {
+    func repeatedSubstringPattern(_ str: String) -> Bool {
+        let strLength = str.characters.count
+        if strLength <= 1 {
+          return false
+        }
+        var startString = ""
+        var endString = ""
+        var startMatchingIndex = 0
+        var stringPattern: String?
+        var endMatchingIndex = strLength - 1;
+        for n in 0..<strLength/2 {
+            startString = startString + String(str[str.index(str.startIndex, offsetBy: n)])
+            endString = String(str[str.index(str.startIndex, offsetBy:strLength - 1 - n)]) + endString
+            if (startString == endString ) {
+                 stringPattern = startString
+                 startMatchingIndex = n
+                 endMatchingIndex = strLength - 1 - n;
+            }
+        }
+        if startMatchingIndex+1 != endMatchingIndex && stringPattern != nil {
+            let startIndex = str.index(str.startIndex, offsetBy: startMatchingIndex+1);
+            let endIndex = str.index(str.startIndex, offsetBy: endMatchingIndex);
+            let remainingString = str[startIndex..<endIndex]
+            return canConstructFromBase(base: remainingString, target: str)
+        } else if startMatchingIndex+1 == endMatchingIndex && stringPattern != nil {
+            return true
+        }
+       return false
+    }
+    
+    func canConstructFromBase(base:String,target:String)-> Bool {
+        var baseString = base;
+        if target.range(of: base) == nil {
+           return false
+        }
+        
+        while baseString.characters.count < target.characters.count {
+            baseString = baseString + base
+        }
+        
+        return baseString == target
+    }
+    
+}
+
+class UglyNumber {
+   //https://leetcode.com/problems/ugly-number/?tab=Description 
+    //beats 85.29%
+    func isUgly(_ num: Int) -> Bool {
+        let uglyPrimes = [2,3,5]
+        if num < 1 {
+           return false
+        } else if num == 1 {
+           return true
+        }
+        
+        var result = num
+        
+        while result > 1 {
+            if result % 5 == 0 {
+               result = result/5
+            } else if result % 3 == 0 {
+               result = result/3
+            } else if result % 2 == 0 {
+               result = result/2
+            } else {
+               break
+            }
+        }
+        
+        if result == 1 {return true}
+        
+        return uglyPrimes.contains(result)
+    }
+}

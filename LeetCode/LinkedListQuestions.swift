@@ -35,6 +35,17 @@ import Foundation
         return current
      }
     
+     //https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
+        var currentNode = head
+        while currentNode?.next != nil {
+            while currentNode?.val == currentNode?.next?.val {
+                currentNode?.next = currentNode?.next?.next
+            }
+            currentNode = currentNode?.next
+        }
+        return head
+    }
     
     
   }
