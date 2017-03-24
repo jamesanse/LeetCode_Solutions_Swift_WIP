@@ -968,3 +968,118 @@ class UglyNumber {
         return uglyPrimes.contains(result)
     }
 }
+
+class HouseRobber {
+  //https://leetcode.com/problems/house-robber/#/description
+    func rob(_ nums: [Int]) -> Int {
+        func max(a:Int,b:Int) -> Int {
+            return a > b ? a : b
+        }
+        var robbed = 0
+        var notRobbed = 0
+        for (index, stash) in nums.enumerated() {
+            if index % 2 == 0 {
+              robbed = max(a: notRobbed,b: robbed + stash)
+            } else {
+              notRobbed = max(a: robbed,b: notRobbed + stash)
+            }
+        }
+        return max(a: robbed,b: notRobbed)
+    }
+    
+}
+
+class IsPowerOfFour {
+    //https://leetcode.com/problems/power-of-four/#/description
+    //using bit manipulation will yield much better result
+    func isPowerOfFour(_ num: Int) -> Bool {
+        var powerOfFours = [Int]()
+        var n:Float = 0
+        var power:Float = 0
+        while n < powf(2, 32) {
+            n = powf(4,power)
+            powerOfFours.append(Int(n))
+            power = power + 1
+        }
+        
+        return powerOfFours.contains(num)
+    }
+}
+
+class ReverseVowels {
+    //https://leetcode.com/problems/reverse-vowels-of-a-string/#/description
+    func reverseVowels(_ s: String) -> String {
+        let vowels = ["a","e","i","o","u","A","E","I","O","U"]
+        var res : NSString = NSString(string: s)
+        
+        var start = 0
+        var end = res.length - 1
+        
+        while start < end {
+            
+            while start < end {
+                if vowels.contains(res.substring(with: NSMakeRange(start, 1)))  {
+                    
+                    break
+                }
+                start += 1
+            }
+            
+            while start < end {
+                if vowels.contains(res.substring(with: NSMakeRange(end, 1)))  {
+                    break
+                }
+                end -= 1
+            }
+            let a = res.substring(with: NSMakeRange(start, 1))
+            let b = res.substring(with: NSMakeRange(end, 1))
+            
+            res = NSString(string:res.replacingCharacters(in: NSMakeRange(start, 1), with: b))
+            res = NSString(string:res.replacingCharacters(in: NSMakeRange(end, 1), with: a))
+            
+            start += 1
+            end -= 1
+            
+        }
+        
+        return String(res)
+    }
+}
+
+
+class PerfectValidSquare {
+    //https://leetcode.com/problems/valid-perfect-square/#/description
+    //beats 83.3%!
+    func isPerfectSquare(_ num: Int) -> Bool {
+        var finalNum = num
+        if num == 1 || num == 0 {
+            return true
+        }
+        
+        var initialMultiplier  = 1
+        var otherMultiplier = num / initialMultiplier
+        
+        while otherMultiplier / initialMultiplier > 1 {
+            initialMultiplier = initialMultiplier*2
+            otherMultiplier = otherMultiplier/2
+        }
+        
+        if otherMultiplier == initialMultiplier {
+             return otherMultiplier * otherMultiplier == finalNum
+        }
+        
+        let range = otherMultiplier > initialMultiplier ? initialMultiplier...otherMultiplier : otherMultiplier...initialMultiplier
+        
+        for i in range {
+            let sum = i*i
+            if sum == num {
+                return true
+            } else if sum > num {
+                return false
+            }
+           
+        }
+        return false
+    }
+    
+}

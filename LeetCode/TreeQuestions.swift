@@ -175,8 +175,29 @@ import Foundation
         return res.reversed()
     }
     
+     func pathSum(_ root: TreeNode?, _ sum: Int) -> Int {
+        
+        func pathSumInternal(_ root: TreeNode?, _ internalSum: Int) -> Int {
+            if let node = root {
+                if node.val == internalSum {
+                    return 1 + pathSumInternal(node.left, internalSum - node.val) + pathSumInternal(node.right, internalSum - node.val)
+                } else  {
+                    return pathSumInternal(node.left, internalSum - node.val) + pathSumInternal(node.right, internalSum - node.val)
+                }
+            }
+            else {
+                return 0
+            }
+        }
+        
+        if root == nil {
+           return 0
+        }
+        
+        return pathSumInternal(root, sum) + pathSum(root?.left, sum) + pathSum(root?.right, sum)
+        
+    }
     
-  }
-
+}
 
 

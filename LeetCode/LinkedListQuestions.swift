@@ -47,6 +47,48 @@ import Foundation
         return head
     }
     
+    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        //https://leetcode.com/problems/merge-two-sorted-lists/#/description
+        if l1 == nil && l2 == nil {
+           return nil
+        } else if l1 == nil || l2 == nil {
+            return l1 == nil ? l2 : l1;
+        }
+        var head1 = l1;
+        var head2 = l2;
+        var startingNode: ListNode!
+        if (head1?.val)! > (head2?.val)! {
+           startingNode = head2
+           head2 = head2?.next
+        } else {
+           startingNode = head1
+           head1 = head1?.next
+        }
+        let res = startingNode
+        
+        while head1 != nil && head2 != nil {
+            if (head1?.val)! < (head2?.val)! {
+                startingNode.next = head1
+                startingNode = startingNode.next
+                head1 = head1?.next
+            } else {
+                startingNode.next = head2
+                startingNode = startingNode.next
+                head2 = head2?.next
+            }
+        }
+        
+        if let remainingHead1 = head1 {
+           startingNode.next = remainingHead1
+        }
+        
+        if let remainingHead2 = head2 {
+            startingNode.next = remainingHead2
+        }
+        
+        return res
+    }
+    
     
   }
 
