@@ -35,4 +35,12 @@ class customTests: XCTestCase {
         let boo = perfectSquare.isPerfectSquare(num)
         XCTAssertEqual(boo, true)
     }
+    
+    func testPascalsTriangle() {
+       let numRow = 5
+       let algorithm = PascalsTriangle()
+       let result = algorithm.generate(numRow)
+       XCTAssertEqual(result.count, 5)
+    }
+    
 }

@@ -198,6 +198,75 @@ import Foundation
         
     }
     
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        //https://leetcode.com/problems/symmetric-tree/#/description
+        if root == nil {
+           return true
+        }
+        
+        func isSymmetric(left: TreeNode?,right: TreeNode?) -> Bool {
+            if left == nil && right == nil {
+                return true
+            } else if let _left = left, let _right = right, _left.val == _right.val {
+                //dfs left on left tree, dfs right on right tree
+                return isSymmetric(left: left?.left, right: right?.right)  && isSymmetric(left: left?.right, right: right?.left)
+                
+            } else {
+               return false
+            }
+        
+        }
+        return isSymmetric(left: root?.left, right: root?.right)
+    }
+    
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        //https://leetcode.com/problems/balanced-binary-tree/#/description
+        //n^2 complexity, kinda slow
+        func depthOfTree(root:TreeNode?) -> Int {
+            if let _root = root {
+                let a = depthOfTree(root: _root.left)
+                let b = depthOfTree(root: _root.right)
+                return  a > b ? a + 1 : b + 1
+                
+            } else {
+               return 0
+            }
+        }
+        
+        if root?.left == nil && root?.right == nil {
+           return true
+        } else {
+           return  abs(depthOfTree(root: root?.left) - depthOfTree(root: root?.right)) <= 1 && isBalanced(root?.left) && isBalanced(root?.right)
+        }
+        
+    }
+    
+    func binaryTreePaths(_ root: TreeNode?) -> [String] {
+        //https://leetcode.com/problems/binary-tree-paths/#/description
+        //
+        func DFSDown(root:TreeNode?, res: String ) -> [String] {
+            if let _root = root {
+                if let _left = _root.left, let _right = _root.right {
+                    return DFSDown(root: _left, res: res + "\(_root.val)->") + DFSDown(root: _right, res: res + "\(_root.val)->")
+                } else if let _left = _root.left {
+                    return DFSDown(root: _left, res: res + "\(_root.val)->")
+                } else if let _right = _root.right {
+                   return DFSDown(root: _right, res: res + "\(_root.val)->")
+                } else {
+                   return [res + "\(_root.val)"]
+                }
+            } else {
+                return [String]()
+            }
+        }
+        
+        if let _root = root {
+            return  DFSDown(root: _root, res: "" )
+        } else {
+            return [String]()
+        }
+    }
+    
 }
 
 

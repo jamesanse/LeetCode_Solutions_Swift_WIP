@@ -1083,3 +1083,19 @@ class PerfectValidSquare {
     }
     
 }
+
+class RemoveElement {
+   //https://leetcode.com/problems/remove-element/
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        var originalLength = nums.count
+        for i in 0..<originalLength {
+            if i > nums.count - 1 {
+               break
+            }
+            while i <= nums.count - 1 && nums[i] == val {
+               nums.remove(at: i)
+            }
+        }
+        return nums.count
+    }
+}

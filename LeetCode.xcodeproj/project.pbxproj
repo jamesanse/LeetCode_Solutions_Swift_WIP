@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E908C4931E84EE8900A5210C /* EasyMiscPartTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C4921E84EE8900A5210C /* EasyMiscPartTwo.swift */; };
+		E908C4941E84EE8900A5210C /* EasyMiscPartTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E908C4921E84EE8900A5210C /* EasyMiscPartTwo.swift */; };
 		E950508B1E1F8C7800B2DBAF /* TreeQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E950508A1E1F8C7800B2DBAF /* TreeQuestions.swift */; };
 		E950508C1E1F8C7800B2DBAF /* TreeQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E950508A1E1F8C7800B2DBAF /* TreeQuestions.swift */; };
 		E9645BB51E1E277800141502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9645BB41E1E277800141502 /* AppDelegate.swift */; };
@@ -31,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E908C4921E84EE8900A5210C /* EasyMiscPartTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyMiscPartTwo.swift; sourceTree = "<group>"; };
 		E950508A1E1F8C7800B2DBAF /* TreeQuestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeQuestions.swift; sourceTree = "<group>"; };
 		E9645BB11E1E277800141502 /* LeetCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9645BB41E1E277800141502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 			children = (
 				E9645BB41E1E277800141502 /* AppDelegate.swift */,
 				E9645BD41E1E278B00141502 /* EasyMiscQuestions.swift */,
+				E908C4921E84EE8900A5210C /* EasyMiscPartTwo.swift */,
 				E950508A1E1F8C7800B2DBAF /* TreeQuestions.swift */,
 				E96A20D21E2F4EBD00CB4647 /* LinkedListQuestions.swift */,
 				E9645BB81E1E277800141502 /* Main.storyboard */,
@@ -214,6 +218,7 @@
 				E9645BB51E1E277800141502 /* AppDelegate.swift in Sources */,
 				E96A20D31E2F4EBD00CB4647 /* LinkedListQuestions.swift in Sources */,
 				E9645BD51E1E278B00141502 /* EasyMiscQuestions.swift in Sources */,
+				E908C4931E84EE8900A5210C /* EasyMiscPartTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +230,7 @@
 				E96A20D41E2F4EBD00CB4647 /* LinkedListQuestions.swift in Sources */,
 				E991DF401E51A185004A2A2C /* customTests.swift in Sources */,
 				E9645BD61E1E278B00141502 /* EasyMiscQuestions.swift in Sources */,
+				E908C4941E84EE8900A5210C /* EasyMiscPartTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
