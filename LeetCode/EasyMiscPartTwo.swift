@@ -105,10 +105,98 @@ class ArrangingCoins {
 }
 
 class PascalsTriangle2 {
-   //https://leetcode.com/problems/pascals-triangle-ii/#/description
+    //https://leetcode.com/problems/pascals-triangle-ii/#/description
+    //beats 58.3%
     func getRow(_ rowIndex: Int) -> [Int] {
-        
+        var res = [1]
+        if rowIndex > 0 {
+            for n in 1...rowIndex {
+                if n == 1 {
+                    res.append(1)
+                } else {
+                    for i in 0...n {
+                        if i == 0 {
+                            res.append(1)
+                        } else if i == n{
+                            res.append(1)
+                            for _ in 0..<n {
+                               res.remove(at: 0)
+                            }
+                            
+                        } else {
+                            let ans = res[i] + res[i-1]
+                            res.append(ans)
+                        }
+                    }
+                }
+            }
+        }
+        return res
     }
     
+}
+
+class RemoveDuplicatesFromSortedArray {
+    //https://leetcode.com/problems/remove-duplicates-from-sorted-array/#/description
+    func removeDuplicates(_ nums: inout [Int]) -> Int {
+        let originalLength = nums.count
+        if nums.count <= 1 {
+            return originalLength
+        }
+    
+        for i in 0..<originalLength {
+            if i < originalLength - 1 && nums[i] < nums[i + 1] {
+                nums.append(nums[i])
+            } else if i == originalLength - 1 {
+                nums.append(nums[i])
+            }
+        }
+        nums = Array<Int>(nums.dropFirst(originalLength))
+        return nums.count
+    }
+}
+
+class TrailingZeros {
+   //https://leetcode.com/problems/factorial-trailing-zeroes/#/description
+    func trailingZeroes(_ n: Int) -> Int {
+        var res = 0
+        var copy = n
+        while copy > 0 {
+            copy = copy/5
+            res += copy
+        }
+        return res
+    }
+
+}
+
+class PalindromeNumber {
+    //https://leetcode.com/problems/palindrome-number/#/description
+    func isPalindrome(_ x: Int) -> Bool {
+        
+        func countDigit(x:Int) -> Int {
+            var i = x
+            var res = 0
+            while i > 0 {
+                i = i/10
+                res += 1
+            }
+            return res
+        }
+        if x < 0 {
+           return false
+        } else {
+           var copy = x
+           var newNumber = 0
+           let digits = countDigit(x: x)
+           for i in 0...digits {
+               let remainder = x % 10
+               newNumber += remainder * Int(powf(10, Float(digits-i)))
+               copy = copy / 10
+           }
+            
+           return digits == x
+        }
+    }
 }
 

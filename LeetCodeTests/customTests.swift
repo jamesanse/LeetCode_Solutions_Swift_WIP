@@ -42,5 +42,22 @@ class customTests: XCTestCase {
        let result = algorithm.generate(numRow)
        XCTAssertEqual(result.count, 5)
     }
+ 
+    func testPascalsTriagnle2() {
+        let numRow = 5
+        let algorithm = PascalsTriangle2()
+        let result = algorithm.getRow(numRow)
+       XCTAssertEqual(result, [1,2,1])
+    }
+    
+    func testAddingLinkedList() {
+        let list1 = ListNode(1)
+        list1.next = ListNode(8)
+        
+        let list2 = ListNode(0)
+        list2.addTwoNumbers(list1, list2)
+        XCTAssert(true)
+        
+    }
     
 }
