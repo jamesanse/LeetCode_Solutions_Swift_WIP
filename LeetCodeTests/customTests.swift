@@ -60,4 +60,18 @@ class customTests: XCTestCase {
         
     }
     
+    func testAddTwoNumbers2() {
+        let list1 = ListNode(7)
+        list1.next = ListNode(2)
+        list1.next?.next = ListNode(4)
+        list1.next?.next?.next = ListNode(3)
+        let list2 = ListNode(5)
+        list2.next = ListNode(6)
+        list2.next?.next = ListNode(4)
+        list2.addTwoNumbersTwo(list1, list2)
+        XCTAssert(true)
+        
+    }
+    
+    
 }

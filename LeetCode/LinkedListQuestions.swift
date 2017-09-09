@@ -198,33 +198,65 @@ import Foundation
         return nil
     }
     
-    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+    func addTwoNumbersTwo(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         //https://leetcode.com/problems/add-two-numbers-ii/#/description
-        var countL1 = 0
-        var countL2 = 0
-        var copyl1 = l1
-        var copyl2 = l2
-        while copyl1 != nil {
-            copyl1 = copyl1?.next
-            countL1 += 1
+        var array = [Int]()
+        var array2 = [Int]()
+        var resultNode: ListNode?
+        var head1 = l1
+        var head2 = l2
+        if l1 == nil && l2 == nil {
+            return nil
+        } else if l1 == nil && l2 != nil {
+            return l2
+        } else if l1 != nil && l2 == nil {
+            return l1
         }
-        while copyl2 != nil {
-            copyl2 = copyl2?.next
-            countL2 += 1
+        while let val = head1?.val {
+            array.append(val)
+            head1 = head1?.next
         }
-        if (countL1 != countL2) {
-            var newPartialListHead = countL2 > countL1 ? l1 : l2
-            var extraPoint = abs(countL1-countL2)
-            while extraPoint > 0 {
-               let newHead = ListNode(0)
-               newHead.next = newPartialListHead
-               extraPoint -= 1
-               newPartialListHead = newHead
+        while let val = head2?.val {
+            array2.append(val)
+            head2 = head2?.next
+        }
+        var carry = 0
+        while !array.isEmpty && !array2.isEmpty {
+            var res = array2.last! + array.last! + carry
+            carry = res > 9 ? 1 : 0
+            res -=  res > 9 ? 10 : 0
+            array2.removeLast(1)
+            array.removeLast(1)
+            if let lastNode = resultNode {
+                let newNode = ListNode(res)
+                newNode.next = lastNode
+                resultNode = newNode
+            } else {
+                resultNode = ListNode(res)
             }
         }
+        var remainingValues = [Int]()
+        if !array.isEmpty || !array2.isEmpty {
+            remainingValues = array.isEmpty ? array2 : array
+        }
+        while !remainingValues.isEmpty {
+            var res = remainingValues.last! + carry
+            carry = res > 9 ? 1 : 0
+            res -=  res > 9 ? 10 : 0
+            remainingValues.removeLast(1)
+            if let lastNode = resultNode {
+                let newNode = ListNode(res)
+                newNode.next = lastNode
+                resultNode = newNode
+            }
+        }
+        if carry == 1 {
+            let newNode = ListNode(1)
+            newNode.next = resultNode
+            return newNode
+        }
         
-        
+        return resultNode
     }
-    
-  }
 
+}
