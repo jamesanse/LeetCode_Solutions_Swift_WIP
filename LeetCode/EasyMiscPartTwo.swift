@@ -200,3 +200,57 @@ class PalindromeNumber {
     }
 }
 
+class TwoSum {
+    //https://leetcode.com/problems/two-sum/description/
+    //asked by Amazon
+    //use dictionary for better performance
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var res = [Int]()
+        for i in 0..<nums.count {
+            let b = target - nums[i]
+            for a in i+1..<nums.count {
+                if nums[a] == b {
+                    res.append(i)
+                    res.append(a)
+                    break
+                }
+            }
+        }
+        return res
+    }
+}
+
+class ValidParenthese {
+    //https://leetcode.com/problems/valid-parentheses/description/
+    //asked by Amazon
+    func isValid(_ s: String) -> Bool {
+        var stack = [String]()
+        let dictionary = [")":"(","}":"{","]":"["]
+        for char in s.characters {
+            let string = String(char)
+            if string == "(" || string == "{" || string == "[" {
+                stack.append(string)
+            } else {
+                if let b = stack.last {
+                    if b == dictionary[string] {
+                        stack.remove(at: stack.count-1)
+                    } else {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            }
+        }
+        return stack.isEmpty
+    }
+}
+
+class CountingPrimesLessThanANum {
+    func countPrimes(_ n: Int) -> Int {
+        var res = 0
+        
+        return res
+    }
+}
+

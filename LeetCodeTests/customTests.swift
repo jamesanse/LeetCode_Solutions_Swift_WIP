@@ -73,5 +73,12 @@ class customTests: XCTestCase {
         
     }
     
+    func testValidParenthese() {
+        let testCase = "()"
+        let algo = ValidParenthese()
+        let res = algo.isValid(testCase)
+        XCTAssert(res)
+        
+    }
     
 }
